@@ -94,6 +94,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/products/**").permitAll()
+
+                        .requestMatchers(HttpMethod.PUT,"/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/products/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(

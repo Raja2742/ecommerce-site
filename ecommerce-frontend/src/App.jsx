@@ -5,6 +5,7 @@ import Register from './pages/Register'
 import Login from './pages/Login';
 import Products from './pages/Products';
 import AddProduct from './pages/AddProduct';
+import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   
 
@@ -17,7 +18,22 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/addproducts" element={<AddProduct />} />
+        
+        <Route
+
+              path="/addproduct"
+
+              element={
+
+                  <ProtectedRoute>
+
+                      <AddProduct />
+
+                  </ProtectedRoute>
+
+              }
+
+          />
       </Routes>
     </BrowserRouter>
   );

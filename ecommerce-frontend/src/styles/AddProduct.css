@@ -68,6 +68,20 @@
 
 }
 
+.column{
+
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+
+}
+
+/* .row input{
+
+    flex:1;
+
+} */
+
 .add-product-card button{
 
     padding:14px;
@@ -84,5 +98,20 @@
 .add-product-card button:hover{
 
     background:#43a047;
+
+}
+
+.error-message{
+
+    color:red;
+    font-size:14px;
+    margin-top:-10px;
+
+}
+
+.add-product-card button:disabled{
+
+    background:#9e9e9e;
+    cursor:not-allowed;
 
 }

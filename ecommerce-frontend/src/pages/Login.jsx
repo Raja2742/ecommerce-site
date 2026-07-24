@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/Login.css";
 import { Link } from "react-router-dom";
 import { login } from "../api/authservice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,11 +12,15 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const [errors, setErrors] = useState({
-    
+  
+  
+
     email:"",
     password:""
     });
 
+  const navigate = useNavigate();
+  
   const validateForm = () => {
         let newErrors = {};
 
@@ -50,17 +55,18 @@ function Login() {
             }
             
               const loginData = {
-              
-
                 email,
                 password
-                
               }
+
+              
               try {
 
         const response = await login(loginData);
 
-            console.log(response.data);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("role", response.data.role);
+            localStorage.setItem("email", response.data.email);
 
             } catch (error) {
 
