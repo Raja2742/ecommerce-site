@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import AddProduct from './pages/AddProduct';
 import ProtectedRoute from './components/ProtectedRoute';
+import EditProduct from './pages/EditProduct';
 function App() {
   
 
@@ -18,7 +19,10 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
-        
+        <Route
+            path="/products/edit/:id"
+            element={<EditProduct />}
+        />
         <Route
 
               path="/addproduct"

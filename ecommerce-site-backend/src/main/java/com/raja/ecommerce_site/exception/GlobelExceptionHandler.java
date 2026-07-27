@@ -29,5 +29,17 @@ public class GlobelExceptionHandler {
 
         return ex.getMessage();
     }
+
+    @ExceptionHandler(InsufficientStockException.class)
+    public String handleInsufficientStockException(InsufficientStockException ex){
+
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(CartItemNotFoundException.class)
+    public String handleCartItemNotFoundException(CartItemNotFoundException ex){
+
+        return ex.getMessage();
+    }
 }
 

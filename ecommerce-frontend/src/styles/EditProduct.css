@@ -1,0 +1,117 @@
+.update-product-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f4f6f9;
+    padding:40px;
+}
+
+.update-product-card{
+    width:600px;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.update-product-card h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#333;
+}
+
+.update-product-card form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.update-product-card input,
+.update-product-card textarea{
+
+    width:100%;
+    padding:12px 15px;
+    border:1px solid #dcdcdc;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+    transition:0.3s;
+    box-sizing:border-box;
+
+}
+
+.update-product-card textarea{
+
+    resize:none;
+    height:120px;
+
+}
+
+.update-product-card input:focus,
+.update-product-card textarea:focus{
+
+    border-color:#4CAF50;
+
+}
+
+.row{
+
+    display:flex;
+    gap:20px;
+
+}
+
+.row input{
+
+    flex:1;
+
+}
+
+.column{
+
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+
+}
+
+/* .row input{
+
+    flex:1;
+
+} */
+
+.update-product-card button{
+
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+
+}
+
+.update-product-card button:hover{
+
+    background:#43a047;
+
+}
+
+.error-message{
+
+    color:red;
+    font-size:14px;
+    margin-top:-10px;
+
+}
+
+.update-product-card button:disabled{
+
+    background:#9e9e9e;
+    cursor:not-allowed;
+
+}

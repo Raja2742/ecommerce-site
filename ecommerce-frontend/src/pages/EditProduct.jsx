@@ -1,36 +1,69 @@
-import { useState } from "react";
-import { addProduct } from "../api/productService";
-import "../styles/AddProduct.css";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function AddProduct() {
+import {getProductById,updateProduct} from "../api/productService";
 
-    const initialProduct={
+import "../styles/EditProduct.css";
+function EditProduct() {
 
-    name: "",
-    description: "",
-    price: "",
-    stock: "",
-    category: "",
-    imageUrl: ""
-
-    }
-
-    const [product, setProduct] = useState(initialProduct);
-
-    const handleChange = (e) => {
-
-    const { name, value } = e.target;
-
-    setProduct({
-        ...product,
-        [name]: value
-    });
-
-    };
+    const [product, setProduct] = useState({
+            name: "",
+            description: "",
+            price: "",
+            stock: "",
+            category: "",
+            imageUrl: ""
+        });
 
     const [errors, setErrors] = useState({});
 
     const [loading, setLoading] = useState(false);
+
+    const [fetching, setFetching] = useState(true);
+
+
+    const { id } = useParams();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        fetchProduct();
+
+    }, [id]);
+
+    
+
+    const handleChange = (e) => {
+
+    setProduct({
+
+        ...product,
+
+        [e.target.name]: e.target.value
+
+    });
+
+};
+    
+
+    
+
+    const fetchProduct = async () => {
+
+    try {
+
+        const response = await getProductById(id);
+
+        setProduct(response.data);
+
+    } finally {
+
+        setFetching(false);
+
+    }
+
+};
 
     const validateForm = () => {
 
@@ -44,12 +77,12 @@ function AddProduct() {
         newErrors.description = "Description is required";
     }
 
-    if(product.price === ""){
-        newErrors.price = "Price is required";
+    if(product.price <= 0){
+        newErrors.price = "Price must be greater than 0";
     }
 
-    if(product.stock === ""){
-        newErrors.stock = "Stock is required";
+    if(product.stock < 0){
+        newErrors.stock = "Stock cannot be negative";
     }
 
     if(product.category.trim() === ""){
@@ -73,31 +106,23 @@ function AddProduct() {
         return;
     }
 
-    // const productData = {
-    //     product.name,
-    //     product.description,
-    //     price,
-    //     stock,
-    //     category,
-    //     imageUrl
-    // };
 
     try {
 
         setLoading(true);
 
-        const response = await addProduct(product);
+         await updateProduct(id, product);
 
-        console.log(response.data);
+        alert("Product Updated Successfully");
 
-        alert("Product Added Successfully");
-        setProduct(initialProduct);
+        navigate("/products");
+
 
     } catch (error) {
 
-        console.log(error);
+        console.error(error.response?.data || error.message);
 
-        alert("Failed to Add Product");
+        alert("Failed to update Product");
 
     } finally {
 
@@ -107,17 +132,28 @@ function AddProduct() {
 
     }
 };
+
+    if(fetching){
+
+        return <h2>Loading...</h2>;
+
+    }
     return (
-    <div className="add-product-page">
 
-        <div className="add-product-card">
+        
+    <div className="update-product-page">
 
-            <h2>Add Product</h2>
+        
+
+        <div className="update-product-card">
+
+            <h2>Edit Product</h2>
 
             <form onSubmit={handleSubmit}>
 
                 <input
                     name="name"
+                    type="text"
                     placeholder="name"
                     value={product.name}
                     onChange={handleChange}
@@ -200,12 +236,17 @@ function AddProduct() {
                     onChange={handleChange}
                 />
                 
-               
+                {errors.imageUrl && (
+                    <p className="error-message">
+                        {errors.imageUrl}
+                    </p>
+                )}
+
                 <button
                     type="submit"
                     disabled={loading}
                 >
-                    {loading ? "Adding Product..." : "Add Product"}
+                    {loading ? "Updating Product..." : "Update Product"}
                 </button>
             </form>
 
@@ -215,4 +256,4 @@ function AddProduct() {
 );
 }
 
-export default AddProduct;
+export default EditProduct;

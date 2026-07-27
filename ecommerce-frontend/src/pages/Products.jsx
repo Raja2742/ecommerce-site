@@ -1,9 +1,11 @@
 import { useState,useEffect } from "react";
 
-import { getAllProducts } from "../api/productService";
+import { getAllProducts,deleteProduct } from "../api/productService";
 
 import ProductCard from "../components/ProductCard"; 
 import "../styles/Products.css"
+
+
 function Products() {
 const [products,setProducts] =useState([]);
 
@@ -11,6 +13,33 @@ useEffect(()=>{
     fetchProducts();
 },[]);
 
+
+const handleDelete = async (id) => {
+
+    const confirmDelete = window.confirm(
+        "Are you sure?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+
+        await deleteProduct(id);
+
+        setProducts(products.filter(
+            product => product.id !== id
+        ));
+
+        alert("Deleted Successfully");
+
+    } catch (error) {
+
+        console.error(error);
+        
+
+    }
+
+};
 
 const fetchProducts = async () => {
 
@@ -49,6 +78,7 @@ const fetchProducts = async () => {
                     <ProductCard
                         key={product.id}
                         product={product}
+                        onDelete={handleDelete}
                     />
 
                 ))}
