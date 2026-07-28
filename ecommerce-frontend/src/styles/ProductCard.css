@@ -173,3 +173,55 @@
 .delete-btn:hover{
     background:#b91c1c;
 }
+
+.quantity-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin:15px 0;
+
+}
+
+.quantity-container button{
+    
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.quantity-container span{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    min-width:20px;
+
+    text-align:center;
+
+}
+
+.addcart{
+    display: flex;
+    gap: 20px;
+}

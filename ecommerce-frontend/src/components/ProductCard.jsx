@@ -1,10 +1,9 @@
 import "../styles/ProductCard.css"
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../api/productService";
+import { addToCart } from "../api/cartService";
 import { useNavigate } from "react-router-dom";
-
-
-
 
 
 
@@ -12,7 +11,48 @@ function ProductCard({ product ,onDelete }) {
 
     const navigate=useNavigate();
 
+
+    const [quantity, setQuantity] = useState(1);
+
+
     const role = localStorage.getItem("role");
+
+    const increaseQuantity = () => {
+
+        if (quantity < product.stock) {
+
+            setQuantity(quantity + 1);
+
+        }
+
+    };
+
+    const decreaseQuantity = () => {
+
+        if (quantity > 1) {
+
+            setQuantity(quantity - 1);
+
+        }
+
+    };
+
+    const handleAddToCart = async () => {
+
+        try {
+
+            await addToCart(product.id, quantity);
+
+            alert("Product Added Successfully");
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    };
+
     return (
 
         <div className="product-card">
@@ -57,13 +97,36 @@ function ProductCard({ product ,onDelete }) {
                     )}
                 </span>
 
-                <button
-                   className="cart-btn" disabled={product.stock === 0}
-                >
-                    {product.stock === 0
-                        ? "Out of Stock"
-                        : "Add to Cart"}
-                </button>
+                <div className="addcart">
+
+                    <button
+                    className="cart-btn" disabled={product.stock === 0} onClick={handleAddToCart}
+                    >
+                        {product.stock === 0
+                            ? "Out of Stock"
+                            : "Add to Cart"}
+                    </button>
+
+                    <div className="quantity-container">
+
+                        <button
+                            onClick={decreaseQuantity}
+                        >
+                            -
+                        </button>
+
+                        <span>{quantity}</span>
+
+                        <button
+                            onClick={increaseQuantity}
+                        >
+                            +
+                        </button>
+
+                    </div>
+                </div>
+
+                
                 
                 {role === "ADMIN" && (
 

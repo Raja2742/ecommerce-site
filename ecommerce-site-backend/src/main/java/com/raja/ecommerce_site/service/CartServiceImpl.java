@@ -59,6 +59,7 @@ public class CartServiceImpl implements CartService {
         response.setImageUrl(cartItem.getProduct().getImageUrl());
 
         response.setQuantity(cartItem.getQuantity());
+        response.setStock(cartItem.getProduct().getStock());
 
         return response;
     }

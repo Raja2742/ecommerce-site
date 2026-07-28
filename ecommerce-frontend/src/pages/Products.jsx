@@ -7,55 +7,59 @@ import "../styles/Products.css"
 
 
 function Products() {
-const [products,setProducts] =useState([]);
+    const [products,setProducts] =useState([]);
+    const [quantity, setQuantity] = useState(1);
 
-useEffect(()=>{
-    fetchProducts();
-},[]);
+    useEffect(()=>{
+        fetchProducts();
+    },[]);
 
 
-const handleDelete = async (id) => {
+    const handleDelete = async (id) => {
 
-    const confirmDelete = window.confirm(
-        "Are you sure?"
-    );
+        const confirmDelete = window.confirm(
+            "Are you sure?"
+        );
 
-    if (!confirmDelete) return;
+        if (!confirmDelete) return;
 
-    try {
+        try {
 
-        await deleteProduct(id);
+            await deleteProduct(id);
 
-        setProducts(products.filter(
-            product => product.id !== id
-        ));
+            setProducts(products.filter(
+                product => product.id !== id
+            ));
 
-        alert("Deleted Successfully");
+            alert("Deleted Successfully");
 
-    } catch (error) {
+        } catch (error) {
 
-        console.error(error);
-        
+            console.error(error);
+            
 
-    }
+        }
 
-};
+    };
 
-const fetchProducts = async () => {
+    const fetchProducts = async () => {
 
-    try {
+        try {
 
-        const response = await getAllProducts();
+            const response = await getAllProducts();
 
-        setProducts(response.data);
+            setProducts(response.data);
 
-    } catch (error) {
+        } catch (error) {
 
-        console.log(error);
+            console.log(error);
 
-    }
+        }
 
-};
+    };
+
+    
+
     console.log(products);
 
     return(

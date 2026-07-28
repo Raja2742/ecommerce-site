@@ -7,6 +7,7 @@ import Products from './pages/Products';
 import AddProduct from './pages/AddProduct';
 import ProtectedRoute from './components/ProtectedRoute';
 import EditProduct from './pages/EditProduct';
+import Cart from './pages/Cart';
 function App() {
   
 
@@ -19,6 +20,8 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
+
+        <Route path='/cartitems' element={<Cart/>}/>
         <Route
             path="/products/edit/:id"
             element={<EditProduct />}

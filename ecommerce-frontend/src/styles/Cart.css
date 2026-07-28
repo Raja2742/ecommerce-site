@@ -1,0 +1,18 @@
+.cart-page{
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.cart-page h1{
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.cart-items{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
