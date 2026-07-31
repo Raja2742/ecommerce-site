@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCart } from "../api/cartService";
+import { getCart,removeCartItem,clearCart } from "../api/cartService";
 import CartItem from "../components/CartItem";
 import "../styles/Cart.css";
 
@@ -33,6 +33,60 @@ function Cart() {
         }
 
     };
+
+    const handleRemove = async (id) => {
+    
+            const confirmRemove = window.confirm(
+                "Are you sure?"
+            );
+    
+            if (!confirmRemove) return;
+    
+            try {
+    
+                await removeCartItem(id);
+    
+                setCartItems(cartItems.filter(
+                    cartItem => cartItem.id !== id
+                ));
+    
+                alert("Removed Successfully");
+    
+            } catch (error) {
+    
+                console.error(error);
+                
+    
+            }
+    
+        };
+
+        const handleclearCart = async () => {
+    
+            const confirmRemove = window.confirm(
+                "Are you sure?"
+            );
+    
+            if (!confirmRemove) return;
+    
+            try {
+    
+                await clearCart();
+    
+                
+    
+                alert("clearCart Successfully");
+    
+            } catch (error) {
+    
+                console.error(error);
+                
+    
+            }
+    
+        };
+
+
     if (loading) {
 
         return <h2>Loading...</h2>;
@@ -64,9 +118,13 @@ function Cart() {
     );
     return (
 
-        <div className="cart-page">
+        <div className="cart-page" >
 
+        <div className="cart-header">
             <h1>Shopping Cart</h1>
+
+            <button onClick={()=>handleclearCart()}>clearCart</button>
+        </div>
 
         <div className="items">
             {
@@ -80,6 +138,8 @@ function Cart() {
                         item={item}
 
                         fetchCart={fetchCart}
+
+                        handleRemove={handleRemove}
                     />
 
                 ))

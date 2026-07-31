@@ -13,6 +13,7 @@ import com.raja.ecommerce_site.exception.UsernameNotFoundException;
 import com.raja.ecommerce_site.repository.CartRepository;
 import com.raja.ecommerce_site.repository.ProductRepository;
 import com.raja.ecommerce_site.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -181,6 +182,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional
     public void clearCart() {
 
         User user = findUser();

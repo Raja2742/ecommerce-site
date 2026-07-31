@@ -18,4 +18,28 @@ api.interceptors.request.use((config)=>{
 
 });
 
+api.interceptors.response.use(
+
+    (response) => {
+
+        return response;
+
+    },
+
+    (error) => {
+
+        if(error.response?.status === 403){
+
+            
+            localStorage.clear();
+            window.location.href = "/login";
+
+        }
+
+        return Promise.reject(error);
+
+    }
+
+);
+
 export default api;

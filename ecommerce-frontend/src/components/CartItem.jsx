@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import "../styles/CartItem.css";
 import { updateCart } from "../api/cartService";
-function CartItem({ item ,fetchCart}) {
+function CartItem({ item ,fetchCart ,handleRemove}) {
 
     
     
@@ -91,7 +91,7 @@ function CartItem({ item ,fetchCart}) {
 
                 </div>
 
-                <button className="remove-btn">
+                <button onClick={()=>handleRemove(item.id)} className="remove-btn">
 
                     Remove
 

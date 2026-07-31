@@ -64,10 +64,11 @@ function Login() {
 
         const response = await login(loginData);
 
+            
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("role", response.data.role);
             localStorage.setItem("email", response.data.email);
-
+            alert("Login Successfull");
             } catch (error) {
 
                 console.log(error.response.data);
