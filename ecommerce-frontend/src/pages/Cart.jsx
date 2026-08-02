@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCart,removeCartItem,clearCart } from "../api/cartService";
+import { checkOut } from "../api/orderService";
 import CartItem from "../components/CartItem";
 import "../styles/Cart.css";
 
@@ -10,6 +11,7 @@ function Cart() {
 
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState("");
     useEffect(() => {
         fetchCart();
     }, []);
@@ -24,13 +26,30 @@ function Cart() {
 
         } catch (error) {
 
-            console.error(error);
+            setMessage(error);
 
         } finally {
 
             setLoading(false);
 
         }
+
+    };
+
+    const handleCheckOut = async () => {
+
+        try {
+
+            const response = await checkOut();
+            
+            fetchCart();
+            
+
+        } catch (error) {
+
+            console.error(error);
+
+        } 
 
     };
 
@@ -106,20 +125,29 @@ function Cart() {
         );
 
     }
+   
+const total = Array.isArray(cartItems)
+    ? cartItems.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+      )
+    : 0;
+    
 
-    const total = cartItems.reduce(
-
-        (sum, item) =>
-
-            sum + item.price * item.quantity,
-
-        0
-
-    );
     return (
 
+        
         <div className="cart-page" >
+        
+        {message && (
 
+            <p className="error-message">
+
+                {message}
+
+            </p>
+
+        )}
         <div className="cart-header">
             <h1>Shopping Cart</h1>
 
@@ -155,6 +183,8 @@ function Cart() {
                     Total : ${total}
 
                 </h2>
+
+                <button onClick={()=>handleCheckOut()} className="checkOut">check Out</button>
 
             </div>
 

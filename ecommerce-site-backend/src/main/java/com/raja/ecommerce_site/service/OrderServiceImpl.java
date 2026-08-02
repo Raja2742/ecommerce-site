@@ -1,5 +1,7 @@
 package com.raja.ecommerce_site.service;
 
+import com.raja.ecommerce_site.dto.OrderItemResponse;
+import com.raja.ecommerce_site.dto.OrderResponse;
 import com.raja.ecommerce_site.entity.*;
 import com.raja.ecommerce_site.exception.UsernameNotFoundException;
 import com.raja.ecommerce_site.repository.*;
@@ -16,6 +18,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
+
+
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -91,6 +95,59 @@ public class OrderServiceImpl implements OrderService {
         // Clear Cart
         cartRepository.deleteByUser(user);
 
+
+
+    }
+
+    @Override
+    public List<OrderResponse> getMyOrders() {
+        User user = getCurrentUser();
+
+        List<Order> orders = orderRepository.findByUser(user);
+
+        List<OrderResponse> responses = new ArrayList<>();
+
+
+        for (Order order : orders) {
+            List<OrderItem> orderItems =
+                    orderItemRepository.findByOrder(order);
+
+            List<OrderItemResponse> itemResponses =
+                    new ArrayList<>();
+
+                for (OrderItem item : orderItems) {
+
+                    OrderItemResponse response =
+                            new OrderItemResponse();
+
+                    response.setProductId(item.getProduct().getId());
+
+                    response.setProductName(item.getProduct().getName());
+
+                    response.setImageUrl(item.getProduct().getImageUrl());
+
+                    response.setQuantity(item.getQuantity());
+
+                    response.setPrice(item.getPrice());
+
+                    itemResponses.add(response);
+
+                }
+            OrderResponse response = new OrderResponse();
+
+            response.setOrderId(order.getId());
+
+            response.setTotal(order.getTotal());
+
+            response.setStatus(order.getStatus());
+
+            response.setCreatedAt(order.getCreatedAt());
+
+            response.setItems(itemResponses);
+
+            responses.add(response);
+        }
+        return responses;
     }
 
     private User getCurrentUser() {
@@ -105,4 +162,8 @@ public class OrderServiceImpl implements OrderService {
                         new UsernameNotFoundException("User not found"));
     }
 
+
+
 }
+
+

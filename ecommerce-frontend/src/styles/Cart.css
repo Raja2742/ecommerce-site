@@ -57,3 +57,44 @@
     gap:20px;
 
 }
+
+.checkOut{
+    background:#17d624;
+
+    color:rgb(16, 15, 15);
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+}
+
+.cart-total{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:20px;
+
+}
+
+.cart-total h2{
+    color:#1e293b;
+
+    margin:0;
+}
+
+.error-message {
+    color: rgb(7, 221, 29);
+    margin-top: 10px;
+    font-weight: bold;
+}

@@ -121,6 +121,8 @@ public class CartServiceImpl implements CartService {
         User user =findUser();
         List<CartItem> cartItems = cartRepository.findByUser(user);
 
+
+
         return cartItems.stream()
                 .map(this::mapToResponse)
                 .toList();
