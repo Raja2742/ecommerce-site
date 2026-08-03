@@ -19,3 +19,19 @@ export const updateProduct = (id, product) => {
 export const deleteProduct = (id) => {
     return api.delete(`/products/${id}`);
 };
+
+export const getProductsByCategory = (category) => {
+
+    return api.get(`/products/category/${category}`);
+
+};
+
+export const searchProducts = (keyword) => {
+
+    return api.get(
+
+        `/products/search?keyword=${keyword}`
+
+    );
+
+};

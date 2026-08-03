@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-
+import { useSearchParams } from "react-router-dom";
 import { getAllProducts,deleteProduct } from "../api/productService";
 
 import ProductCard from "../components/ProductCard"; 
@@ -9,10 +9,15 @@ import "../styles/Products.css"
 function Products() {
     const [products,setProducts] =useState([]);
     const [quantity, setQuantity] = useState(1);
+    const [searchParams] = useSearchParams();
 
-    useEffect(()=>{
-        fetchProducts();
-    },[]);
+    const category = searchParams.get("category");
+
+    useEffect(() => {
+
+    fetchProducts();
+
+}, [category]);
 
 
     const handleDelete = async (id) => {
@@ -44,19 +49,31 @@ function Products() {
 
     const fetchProducts = async () => {
 
-        try {
+            try {
 
-            const response = await getAllProducts();
+                let response;
 
-            setProducts(response.data);
+                if (category) {
 
-        } catch (error) {
+                    response =
+                        await getProductsByCategory(category);
 
-            console.log(error);
+                } else {
 
-        }
+                    response =
+                        await getAllProducts();
 
-    };
+                }
+
+                setProducts(response.data);
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
 
     
 
@@ -66,6 +83,24 @@ function Products() {
         <div className="products-page">
 
             <div className="products-header">
+
+                <h2>
+
+                    {
+
+                        category
+
+                        ?
+
+                        `${category} Products`
+
+                        :
+
+                        "All Products"
+
+                    }
+
+                </h2>
 
                 <h1>Our Products</h1>
 

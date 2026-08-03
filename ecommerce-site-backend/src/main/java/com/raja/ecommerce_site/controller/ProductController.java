@@ -6,6 +6,7 @@ import com.raja.ecommerce_site.dto.ProductResponse;
 import com.raja.ecommerce_site.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,5 +55,33 @@ public class ProductController {
             @PathVariable Long id) {
 
         productService.deleteProduct(id);
+    }
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<ProductResponse>>
+    getProductsByCategory(@PathVariable String category){
+
+        return ResponseEntity.ok(
+
+                productService
+                        .getProductsByCategory(category)
+
+        );
+
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponse>> searchProducts(
+
+            @RequestParam String keyword
+
+    ) {
+
+        return ResponseEntity.ok(
+
+                productService.searchProducts(keyword)
+
+        );
+
     }
 }

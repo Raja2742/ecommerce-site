@@ -1,0 +1,76 @@
+/* Home.css */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+  background:linear-gradient(
+180deg,
+#ffffff 0%,
+#f7f9fc 100%
+);
+    color:#333;
+
+}
+
+.home{
+
+    width:100%;
+
+    min-height:100vh;
+
+    background:#f8f9fa;
+
+}
+
+/* Gives every section equal spacing */
+
+.home section{
+
+    padding:60px 20px;
+
+}
+
+/* Smooth scrolling */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+/* Images */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+/* Buttons */
+
+button{
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+/* Links */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}

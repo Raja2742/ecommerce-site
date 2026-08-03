@@ -89,4 +89,29 @@ public class ProductServiceImpl implements ProductService {
         Product product = findProductById(id);
         productRepository.delete(product);
     }
+
+    @Override
+    public List<ProductResponse> getProductsByCategory(String category) {
+
+        List<Product> products =
+                productRepository.findByCategory(category);
+
+        return products.stream()
+                .map(this::mapToResponse)
+                .toList();
+
+    }
+
+    @Override
+    public List<ProductResponse> searchProducts(String keyword) {
+
+        List<Product> products =
+                productRepository
+                        .findByNameContainingIgnoreCase(keyword);
+
+        return products.stream()
+                .map(this::mapToResponse)
+                .toList();
+
+    }
 }

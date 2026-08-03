@@ -1,0 +1,73 @@
+.category-section{
+
+    max-width:1200px;
+
+    margin:70px auto;
+
+    padding:20px;
+
+}
+
+.category-section h2{
+
+    text-align:center;
+
+    font-size:34px;
+
+    margin-bottom:40px;
+
+    color:#222;
+
+}
+
+.category-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+    gap:25px;
+
+}
+
+.category-card{
+
+    background:white;
+
+    padding:35px 20px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.category-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.category-icon{
+
+    font-size:60px;
+
+    margin-bottom:15px;
+
+}
+
+.category-card h3{
+
+    color:#333;
+
+    font-size:22px;
+
+}

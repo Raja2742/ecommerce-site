@@ -9,13 +9,14 @@ import ProtectedRoute from './components/ProtectedRoute';
 import EditProduct from './pages/EditProduct';
 import Cart from './pages/Cart';
 import Orders from './pages/Orders';
+import Home from './pages/Home';
 function App() {
   
 
  return (
    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        
 
         <Route path="/login" element={<Login />} />
 
@@ -27,6 +28,11 @@ function App() {
         <Route
             path="/products/edit/:id"
             element={<EditProduct />}
+        />
+
+        <Route
+            path="/"
+            element={<Home />}
         />
         <Route
 

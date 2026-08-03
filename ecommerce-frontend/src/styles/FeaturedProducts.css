@@ -1,0 +1,65 @@
+.featured-products{
+
+    max-width:1200px;
+
+    margin:70px auto;
+
+    padding:0 20px;
+
+}
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.section-header h2{
+
+    font-size:34px;
+
+    color:#222;
+
+}
+
+.section-header button{
+
+    background:#ff6b00;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.section-header button:hover{
+
+    background:#e65c00;
+
+}
+
+.featured-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+
+}
