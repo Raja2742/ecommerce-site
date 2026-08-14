@@ -10,6 +10,8 @@ import EditProduct from './pages/EditProduct';
 import Cart from './pages/Cart';
 import Orders from './pages/Orders';
 import Home from './pages/Home';
+import ProductDetails from './pages/ProductDetails';
+import AdminDashboard from "./pages/AdminDashboard";
 function App() {
   
 
@@ -19,11 +21,15 @@ function App() {
         
 
         <Route path="/login" element={<Login />} />
-
+        <Route
+    path="/admin"
+    element={<AdminDashboard />}
+/>
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
-
-        <Route path='/cartitems' element={<Cart/>}/>
+        
+        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path='/cart' element={<Cart/>}/>
         <Route path='/orders' element={<Orders/>}/>
         <Route
             path="/products/edit/:id"

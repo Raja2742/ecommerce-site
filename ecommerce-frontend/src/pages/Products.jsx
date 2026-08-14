@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getAllProducts,deleteProduct } from "../api/productService";
+import { getAllProducts,deleteProduct,getProductsByCategory } from "../api/productService";
 
 import ProductCard from "../components/ProductCard"; 
 import "../styles/Products.css"

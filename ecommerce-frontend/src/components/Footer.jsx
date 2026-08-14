@@ -62,7 +62,7 @@ function Footer() {
 
                         <FaPhone />
 
-                        +91 9876543210
+                        +91 63045163xx
 
                     </p>
 
@@ -70,7 +70,7 @@ function Footer() {
 
                         <FaMapMarkerAlt />
 
-                        Chennai, India
+                        Coimbatore, India
 
                     </p>
 

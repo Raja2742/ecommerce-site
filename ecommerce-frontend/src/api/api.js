@@ -4,11 +4,16 @@ const api = axios.create({
     baseURL: "http://localhost:8080"
 });
 
-api.interceptors.request.use((config)=>{
+
+// ===============================
+// REQUEST INTERCEPTOR
+// ===============================
+
+api.interceptors.request.use((config) => {
 
     const token = localStorage.getItem("token");
-    console.log("Token:", token);
-    if(token){
+
+    if (token) {
 
         config.headers.Authorization = `Bearer ${token}`;
 
@@ -17,6 +22,11 @@ api.interceptors.request.use((config)=>{
     return config;
 
 });
+
+
+// ===============================
+// RESPONSE INTERCEPTOR
+// ===============================
 
 api.interceptors.response.use(
 
@@ -28,10 +38,17 @@ api.interceptors.response.use(
 
     (error) => {
 
-        if(error.response?.status === 403){
+        const requestUrl = error.config?.url;
 
-            
+        if (
+            (error.response?.status === 401 ||
+             error.response?.status === 403)
+            &&
+            !requestUrl?.includes("/login")
+        ) {
+
             localStorage.clear();
+
             window.location.href = "/login";
 
         }

@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { searchProducts } from "../api/productService";
-
+import "../styles/Navbar.css";
 function Navbar() {
 
     const [search, setSearch] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const navigate = useNavigate();
 
+    const role = localStorage.getItem("role");
         const fetchSuggestions = async (keyword) => {
 
             if (!keyword.trim()) {
@@ -62,73 +63,77 @@ function Navbar() {
 
         <nav className="navbar">
 
-            <Link to="/">Home</Link>
+    <div className="nav-logo">
 
-            <Link to="/products">Products</Link>
+        <Link to="/">ShopEase</Link>
 
-            <Link to="/orders">Orders</Link>
+    </div>
 
-            <input
+    <div className="nav-links">
 
-                    className="search-box"
+        <Link to="/">Home</Link>
 
-                    value={search}
+        <Link to="/products">Products</Link>
 
-                    placeholder="Search products..."
+        <Link to="/orders">Orders</Link>
+        {role=="ADMIN" && (<Link to="/addproduct">AddProduct</Link>)}
+    </div>
 
-                    onChange={(e) => {
+    <div className="search-container">
 
-                        setSearch(e.target.value);
+        <input
+            className="search-box"
+            value={search}
+            placeholder="Search products..."
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleSearch}
+        />
 
-                    }}
-
-                />
-                {
-
-                    
-
-                suggestions.length > 0 && (
+        {
+            suggestions.length > 0 && (
 
                 <div className="suggestions">
 
-                {
+                    {
 
-                suggestions.map(product => (
+                        suggestions.map(product => (
 
-                <div
+                            <div
+                                key={product.id}
+                                className="suggestion"
+                                onClick={() => {
 
-                    key={product.id}
+                                    navigate(`/products/${product.id}`);
 
-                    className="suggestion"
+                                    setSuggestions([]);
 
-                    onClick={() => {
+                                    setSearch("");
 
-                        navigate(`/products/${product.id}`);
+                                }}
+                            >
 
-                        setSuggestions([]);
+                                {product.name}
 
-                        setSearch("");
+                            </div>
 
-                    }}
+                        ))
 
-                >
-
-                    {product.name}
-
-                </div>
-
-                ))
-
-                }
+                    }
 
                 </div>
 
-                )
+            )
+        }
 
-                }
-            <Link to="/cart">Cart</Link>
+    </div>
 
-        </nav>
+    <div className="nav-links">
+
+        <Link to="/cart">🛒 Cart</Link>
+
+    </div>
+
+</nav>
 
     );
 

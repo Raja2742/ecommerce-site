@@ -44,6 +44,7 @@ function Orders() {
 
     }
 
+    let count=0;
     return (
 
         <div className="orders-page">
@@ -59,10 +60,11 @@ function Orders() {
             }
 
             {
-
+                
                 orders.map(order => (
 
                     <OrderCard
+                        count={++count}
                         key={order.orderId}
                         order={order}
                     />

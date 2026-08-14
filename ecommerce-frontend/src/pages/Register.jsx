@@ -69,10 +69,11 @@ function Register() {
 
         const response = await register(registerData);
 
-            console.log(response.data);
+            alert("Register Succesfull");
 
             } catch (error) {
 
+              alert("Register Failed");
                 console.log(error.response.data);
 
             }

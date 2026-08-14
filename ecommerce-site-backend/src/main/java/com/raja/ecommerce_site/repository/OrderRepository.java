@@ -3,6 +3,7 @@ package com.raja.ecommerce_site.repository;
 import com.raja.ecommerce_site.entity.Order;
 import com.raja.ecommerce_site.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,4 +12,7 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order,Long> {
 
     List<Order> findByUser(User user);
+
+    @Query("SELECT COALESCE(SUM(o.total), 0) FROM Order o")
+    Double getTotalRevenue();
 }

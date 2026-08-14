@@ -12,6 +12,7 @@ function Home() {
 
         <div className="home">
             <Navbar/>
+            
             <HeroSection />
 
             <FeaturedProducts />

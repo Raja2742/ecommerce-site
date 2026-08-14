@@ -1,6 +1,6 @@
 import OrderItemCard from "./OrderItemCard";
 import "../styles/OrderCard.css"
-function OrderCard({ order }) {
+function OrderCard({ order ,count }) {
 
     return (
 
@@ -10,7 +10,7 @@ function OrderCard({ order }) {
 
                 <div>
 
-                    <h2>Order #{order.orderId}</h2>
+                    <h2>Order #{count}</h2>
 
                     <p>
 

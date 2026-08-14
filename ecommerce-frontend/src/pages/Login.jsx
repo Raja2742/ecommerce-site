@@ -62,18 +62,43 @@ function Login() {
               
               try {
 
-        const response = await login(loginData);
+              const response = await login(loginData);
+                
+                if (response.data=="Invalid email or password")
+                  alert("Invalid email or password... or Register First");
+              if (response.data.token) {
 
-            
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("role", response.data.role);
-            localStorage.setItem("email", response.data.email);
-            alert("Login Successfull");
-            } catch (error) {
+                  alert("Login Successful");
 
-                console.log(error.response.data);
+                  localStorage.setItem("token", response.data.token);
+                  localStorage.setItem("role", response.data.role);
+                  localStorage.setItem("email", response.data.email);
 
-            }
+                  if (response.data.role === "ADMIN") {
+                      navigate("/admin");
+                  } else {
+                      navigate("/");
+                  }
+              }
+
+          } catch (error) {
+
+              console.log(error.response?.data);
+
+              if (error.response?.status === 401) {
+
+                  alert("Invalid email or password...");
+
+              } else if (error.response?.status === 403) {
+
+                  alert("Access denied");
+
+              } else {
+
+                  alert("Something went wrong. Please try again.");
+
+              }
+          }
           };
 
   return (
