@@ -1,6 +1,7 @@
 package com.raja.ecommerce_site.security;
 
-import io.jsonwebtoken.io.IOException;
+import java.io.IOException;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain)
-            throws ServletException, IOException, java.io.IOException {
+            throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
 
@@ -60,6 +61,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         }
 
+        filterChain.doFilter(request, response);
 
 
     }

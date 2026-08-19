@@ -89,11 +89,12 @@ function Login() {
 
                   alert("Invalid email or password...");
 
-              } else if (error.response?.status === 403) {
+              }// else if (error.response?.status === 403) {
 
-                  alert("Access denied");
+              //     alert("Access denied");
 
-              } else {
+              // } else 
+                {
 
                   alert("Something went wrong. Please try again.");
 
