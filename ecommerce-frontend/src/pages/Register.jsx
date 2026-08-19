@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/Register.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { register } from "../api/authservice";
+import { register } from "../api/authService";
 
 function Register() {
 

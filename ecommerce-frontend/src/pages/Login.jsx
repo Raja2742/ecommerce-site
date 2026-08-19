@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/Login.css";
 import { Link } from "react-router-dom";
-import { login } from "../api/authservice";
+import { login } from "../api/authService";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
